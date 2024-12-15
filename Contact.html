@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(red,black);
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 32px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 0 20px;
+        }
+
+        .contact-form:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 -16px 150px rgb(255, 229, 229);
+        }
+
+        .contact-form h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+            color: #333;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #5a5af2;
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 15px;
+            background-color: #5a5af2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #4545d1;
+            transform: scale(1.05);
+        }
+
+        .contact-form .step-indicator {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .contact-form .step-indicator span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin: 0 5px;
+            border-radius: 50%;
+            background-color: #ccc;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form .step-indicator span.active {
+            background-color: #5a5af2;
+        }
+
+        @media (max-width: 600px) {
+            .contact-form {
+                padding: 20px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            }
+
+            .contact-form h2 {
+                font-size: 20px;
+            }
+
+            .contact-form button {
+                padding: 10px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contact-form">
+        <h2>Contact Us</h2>
+        <form onsubmit=" submitForm(event)">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="phone" placeholder="Phone Number" required>
+            <textarea name="message" rows="5" placeholder="Information" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+        <div class="step-indicator">
+            <span class="active"></span>
+            <span></span>
+        </div>
+    </div>
+    <script src=" https://smtpjs.com/v3/smtp.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+    <script>
+        gsap.from(".contact-form", { duration: 1, y: -100, opacity: 0, ease: "bounce" });
+        gsap.from("input, textarea, button", {
+            duration: 1,
+            opacity: 0,
+            y: 50,
+            stagger: 0.2,
+            ease: "power3.inOut"
+        });
+
+        function submitForm(event) {
+            event.preventDefault();
+            gsap.to(".contact-form", {
+                duration: 1,
+                scale: 1.05,
+                yoyo: true,
+                repeat: 1,
+                ease: "power1.inOut",
+                onComplete: () => alert("Form submitted! Thank you for your message.")
+            });
+        }
+    </script>
+</body>
+
+</html>
